@@ -1,0 +1,22 @@
+{
+  "name": "api-vendas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "dev-fast": "ts-node-dev src/server.ts --inspect --transpile-only --ignore-watch node_modules",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "prettier": "^2.3.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}
