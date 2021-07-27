@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "dev-fast": "ts-node-dev src/server.ts --inspect --transpile-only --ignore-watch node_modules",
+    "dev": "ts-node-dev src/server.ts tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules",
+    "dev2": "ts-node-dev src/server.ts",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
@@ -19,6 +19,7 @@
     "eslint": "^7.31.0",
     "prettier": "^2.3.2",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.10.1",
     "typescript": "^4.3.5"
   },
   "dependencies": {
