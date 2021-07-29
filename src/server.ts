@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
 import cors from 'cors'
+const cowsay = require('cowsay')
 
 import "./database"
 import routes from './routes'
@@ -34,5 +35,7 @@ app.use((
 })
 
 app.listen(3333, () => {
-  console.log('Server started on port 3333')
+  console.log(
+    cowsay.say({text: 'Servidor rodando na porta 3333'})
+  )
 })

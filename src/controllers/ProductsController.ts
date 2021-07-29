@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import ShowProductService from 'src/services/products/ShowProductService'
-import ListProductsService from 'src/services/products/ListProductsService'
-import CreateProductService from 'src/services/products/CreateProductService'
-import UpdateProductService from 'src/services/products/UpdateProductService'
-import DeleteProductService from 'src/services/products/DeleteProductService'
+import ShowProductService from '../services/products/ShowProductService'
+import ListProductsService from '../services/products/ListProductsService'
+import CreateProductService from '../services/products/CreateProductService'
+import UpdateProductService from '../services/products/UpdateProductService'
+import DeleteProductService from '../services/products/DeleteProductService'
 
 export default class ProductsController {
   public async index(req: Request, resp: Response): Promise<Response> {

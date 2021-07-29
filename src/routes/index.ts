@@ -1,9 +1,9 @@
 import { Router } from 'express'
+import productsRouter from './products.routes'
 
 const routes = Router()
 
-routes.get('/', (req, resp) => {
-  return resp.json({ message: "Curso API Rest"})
-})
+routes.use('/products', productsRouter)
+
 
 export default routes
