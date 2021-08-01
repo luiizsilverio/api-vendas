@@ -5,8 +5,11 @@ import CreateUserService from '../services/users/CreateUserService'
 export default class UsersController {
   public async index(req: Request, resp: Response): Promise<Response> {
     const listUsers = new ListUsersService()
-    const user = await listUsers.execute()
-    return resp.json(user)
+    // console.log(req.user.id)
+
+    const users = await listUsers.execute()
+
+    return resp.json(users)
   }
 
   public async create(req: Request, resp: Response): Promise<Response> {

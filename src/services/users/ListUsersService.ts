@@ -8,7 +8,12 @@ class ListUsersService {
 
     const users = await repository.find()
 
-    return users
+    const lista = users.map(user => {
+      delete user.password
+      return user
+    })
+
+    return lista
   }
 }
 
