@@ -3,7 +3,6 @@ import { celebrate, Joi, Segments } from 'celebrate'
 import ProductsController from '../controllers/ProductsController'
 
 const productsRouter = Router()
-
 const controller = new ProductsController()
 
 productsRouter.get('/', controller.index)
