@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { verify } from 'jsonwebtoken'
+import { Secret, verify } from 'jsonwebtoken'
 import AppError from '../errors/AppError'
 import authConfig from '../config/auth'
 
@@ -25,7 +25,7 @@ export default function isAuthenticated(
   const [, token] = authHeader.split(' ')
 
   try {
-    const decodedToken = verify(token, authConfig.jwt.secret,)
+    const decodedToken = verify(token, authConfig.jwt.secret as Secret)
 
     const { sub } = decodedToken as ITokenPayload
 
@@ -33,7 +33,7 @@ export default function isAuthenticated(
 
     return next()
 
-  } catch (error) {
+  } catch {
     throw new AppError("Invalid JWT Token", 403)
   }
 }

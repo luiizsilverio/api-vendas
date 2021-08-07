@@ -2,8 +2,8 @@ import { getCustomRepository } from "typeorm";
 import path from 'path'
 import fs from 'fs'
 
+import User from "@/entities/User"
 import { UsersRepository } from "../../repositories/UsersRepository"
-import User from "../../entities/User"
 import AppError from "../../errors/AppError"
 import uploadConfig from '../../config/upload'
 
