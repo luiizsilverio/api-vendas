@@ -3,7 +3,7 @@ import { isAfter, addHours } from 'date-fns'
 import { hash } from 'bcryptjs'
 
 import { UserTokensRepository } from "../../repositories/UserTokensRepository"
-import { UsersRepository } from "@/repositories/UsersRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
 import AppError from "../../errors/AppError"
 
 interface IRequest {
@@ -37,6 +37,8 @@ class ResetPasswordService {
     }
 
     user.password = await hash(password, 8)
+
+    await usersRepository.save(user)
   }
 }
 

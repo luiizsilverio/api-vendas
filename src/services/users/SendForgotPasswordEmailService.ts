@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { UserTokensRepository } from "../../repositories/UserTokensRepository"
-import { UsersRepository } from "@/repositories/UsersRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
 import AppError from "../../errors/AppError"
 
 interface IRequest {
