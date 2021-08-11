@@ -1,16 +1,35 @@
 import nodemailer from 'nodemailer'
+import HbsMailTemplate from './HbsMailTemplate'
+
+interface ITemplateData {
+  [key: string]: string | number
+}
+
+interface IMailTemplate {
+  template: string;
+  variables: ITemplateData
+}
+
+interface IMailContact {
+  name: string
+  email: string
+}
 
 interface ISendMail {
-  to: string
-  body: string
+  to: IMailContact
+  from?: IMailContact
+  subject: string
+  templateData: IMailTemplate   // body: string
 }
 
 export default class EtherealMail {
-  static async sendMail({ to, body }: ISendMail): Promise<void> {
+  static async sendMail({ to, from, subject, templateData }: ISendMail): Promise<void> {
 
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     const account = await nodemailer.createTestAccount()
+
+    const mailTemplate = new HbsMailTemplate()
 
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
@@ -24,11 +43,24 @@ export default class EtherealMail {
     })
 
     // send mail with defined transport object
+    // const message = await transporter.sendMail({
+    //   from: 'luiiz.silverio@gmail.com',
+    //   to,
+    //   subject: 'Recuperação de senha',
+    //   text: body
+    // })
+
     const message = await transporter.sendMail({
-      from: 'luiiz.silverio@gmail.com',
-      to,
-      subject: 'Recuperação de senha',
-      text: body
+      from: {
+        name: from?.name || 'Equipe API Vebdas',
+        email: from?.email || 'luiiz.silverio@gmail.com'
+      },
+      to: {
+        name: to.name,
+        email: to.email
+      },
+      subject,
+      html: await mailTemplate.parse(templateData)
     })
 
     // getTestMessageUrl only available when sending through an Ethereal account
