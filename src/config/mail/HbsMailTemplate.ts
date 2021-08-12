@@ -1,17 +1,22 @@
-import hbs from 'hbs'
+import handlebars from 'handlebars'
+import fs from 'fs'
 
 interface ITemplateData {
   [key: string]: string | number
 }
 
 interface IMailTemplate {
-  template: string;
+  templateFile: string;
   variables: ITemplateData
 }
 
 export default class HbsMailTemplate {
-  public async parse({template, variables}: IMailTemplate): Promise<string> {
-    const parseTemplate = hbs.parseTemplate(template)
+  public async parse({ templateFile, variables }: IMailTemplate): Promise<string> {
+    const templateFileContent = await fs.promises.readFile(templateFile, {
+      encoding: 'utf-8'
+    })
+
+    const parseTemplate = handlebars.compile(templateFileContent)
 
     return parseTemplate(variables)
   }

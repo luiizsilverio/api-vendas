@@ -1,4 +1,5 @@
 import { getCustomRepository } from "typeorm";
+import path from "path";
 import { UserTokensRepository } from "../../repositories/UserTokensRepository"
 import { UsersRepository } from "../../repositories/UsersRepository";
 import EtherealMail from '../../config/mail/EtherealMail'
@@ -20,12 +21,34 @@ class SendForgotPasswordEmailService {
       throw new AppError('Usuário não encontrado')
     }
 
-    const token = await userTokensRepository.generate(user.id)
+    const { token } = await userTokensRepository.generate(user.id)
 
+    const forgotPasswordTemplate = path.resolve(
+      __dirname,
+      '..', '..',
+      'views',
+      'forgot_password.hbs'
+    )
+
+    try {
     await EtherealMail.sendMail({
-      to: email,
-      body: `Solicitação de redefinição de senha recebida: ${token?.token}`
+      to: {
+        name: user.name,
+        email: user.email
+      },
+      subject: 'Recuperação de Senha [API Vendas]',
+      // body: `Solicitação de redefinição de senha recebida: ${token?.token}`
+      templateData: {
+        templateFile: forgotPasswordTemplate,
+        variables: {
+          name: user.name,
+          link: `http://localhost:3333/reset_password?token=${token}` // front-end
+        }
+      }
     })
+            } catch(err) {
+              console.log(err)
+            }
   }
 }
 

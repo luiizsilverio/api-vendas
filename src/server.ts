@@ -2,6 +2,8 @@ import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import cors from 'cors'
+import 'dotenv/config'
+
 const cowsay = require('cowsay')
 
 import "./database"
