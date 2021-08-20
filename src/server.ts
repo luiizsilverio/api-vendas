@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
+import { pagination } from 'typeorm-pagination'
 import 'express-async-errors'
 import cors from 'cors'
 import 'dotenv/config'
@@ -16,6 +17,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(pagination)
 
 // com isso, se acessarmos localhost:3333/files/nome do arquivo, mostra no navegador
 app.use('/files', express.static(uploadConfig.directory))

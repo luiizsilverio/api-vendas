@@ -30,7 +30,7 @@ class SendForgotPasswordEmailService {
       'forgot_password.hbs'
     )
 
-    try {
+
     await EtherealMail.sendMail({
       to: {
         name: user.name,
@@ -42,13 +42,11 @@ class SendForgotPasswordEmailService {
         templateFile: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          link: `http://localhost:3333/reset_password?token=${token}` // front-end
+          link: `${process.env.APP_WEB_URL}/reset_password?token=${token}` // front-end
         }
       }
     })
-            } catch(err) {
-              console.log(err)
-            }
+
   }
 }
 

@@ -1,6 +1,6 @@
 export default {
   jwt: {
-      secret: 'expertia',
+      secret: process.env.APP_SECRET,
       expiresIn: '1h'
   }
 }
