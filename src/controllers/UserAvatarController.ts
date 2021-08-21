@@ -10,6 +10,7 @@ export default class UserAvatarController {
       filename: req.file.filename
     })
 
+    delete user.password
     return resp.json(user)
   }
 }
